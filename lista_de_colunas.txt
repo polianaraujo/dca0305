@@ -1,0 +1,69 @@
+accommodates
+bathrooms
+bedrooms
+beds
+minimum_nights
+maximum_nights
+number_of_reviews
+latitude
+longitude
+room_type
+amenities
+review_scores_rating
+review_scores_accuracy
+host_is_superhost
+neighbourhood_cleansed
+property_type
+price
+price_log
+has_wifi
+has_ac
+has_pool
+number_of_reviews_log
+maximum_nights_log
+room_type_Hotel room
+room_type_Private room
+room_type_Shared room
+geo_cluster
+bairro_Andaraí
+bairro_Anil
+bairro_Barra da Tijuca
+bairro_Botafogo
+bairro_Catete
+bairro_Catumbi
+bairro_Centro
+bairro_Cidade Nova
+bairro_Copacabana
+bairro_Cosme Velho
+bairro_Engenho Novo
+bairro_Estácio
+bairro_Flamengo
+bairro_Freguesia (Jacarepaguá)
+bairro_Gardênia Azul
+bairro_Glória
+bairro_Grajaú
+bairro_Gávea
+bairro_Humaitá
+bairro_Ipanema
+bairro_Itanhangá
+bairro_Jacarepaguá
+bairro_Jardim Botânico
+bairro_Joá
+bairro_Lagoa
+bairro_Laranjeiras
+bairro_Leblon
+bairro_Leme
+bairro_Lins de Vasconcelos
+bairro_Maracanã
+bairro_Méier
+bairro_Pechincha
+bairro_Praça da Bandeira
+bairro_Rio Comprido
+bairro_Rocinha
+bairro_Santa Teresa
+bairro_São Conrado
+bairro_São Cristóvão
+bairro_Tijuca
+bairro_Urca
+bairro_Vidigal
+bairro_Vila Isabel
