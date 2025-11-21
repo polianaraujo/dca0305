@@ -77,7 +77,7 @@ Epoch 20/20 | Train Loss: 0.2562 | Train Acc: 92.45% | Val Loss: 0.4098 | Val Ac
 Treinamento concluído!
 ```
 
-
+![Treino1](https://github.com/polianaraujo/dca0305/blob/main/u2/images/treino1.png?raw=true)
 
 ***
 
@@ -137,6 +137,8 @@ Epoch 19/20 | Train Loss: 0.5009 | Train Acc: 85.28% | Val Loss: 0.3783 | Val Ac
 Epoch 20/20 | Train Loss: 0.4911 | Train Acc: 85.73% | Val Loss: 0.3722 | Val Acc: 89.54%
 Treinamento concluído!
 ```
+
+![Treino2](https://github.com/polianaraujo/dca0305/blob/main/u2/images/treino2.png?raw=true)
 
 ***
 
