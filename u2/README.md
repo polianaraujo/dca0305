@@ -1,56 +1,55 @@
-## 1ª tentativa
-
-Análise da Tentativa Inicial (Modelo Base)
+## 1ª treinamento: Análise da Tentativa Inicial (Modelo Base)
 Para este projeto, o dataset escolhido foi o SVHN (Street View House Numbers). Este dataset consiste em imagens coloridas (3 canais, RGB) de 32x32 pixels, representando 10 classes (dígitos de 0 a 9).
 
 1. Configuração do Experimento
-Seguindo os requisitos, a arquitetura-base foi mantida como a LeNet-5 vista em aula, com as seguintes adaptações para o SVHN:
 
-- Arquitetura (model_svhn):
+    Seguindo os requisitos, a arquitetura-base foi mantida como a LeNet-5 vista em aula, com as seguintes adaptações para o SVHN:
 
-    - A primeira camada convolucional (C1) teve seu parâmetro in_channels alterado de 1 (para o MNIST/escala de cinza) para 3, para aceitar as imagens coloridas (RGB) do SVHN.
+    - Arquitetura (`model_svhn`):
 
-    - Devido ao tamanho da imagem de entrada (32x32 em vez de 28x28), a saída da última camada convolucional/pooling (C5) resultou em um tensor de 120x2x2.
+        - A primeira camada convolucional (C1) teve seu parâmetro in_channels alterado de 1 (para o MNIST/escala de cinza) para 3, para aceitar as imagens coloridas (RGB) do SVHN.
 
-    - Consequentemente, a primeira camada linear (F6) foi ajustada para ter in_features de 480 (ou seja, 120 * 2 * 2).
+        - Devido ao tamanho da imagem de entrada (32x32 em vez de 28x28), a saída da última camada convolucional/pooling (C5) resultou em um tensor de 120x2x2.
 
-- Treinamento:
+        - Consequentemente, a primeira camada linear (F6) foi ajustada para ter in_features de 480 (ou seja, 120 * 2 * 2).
 
-    - Dataset: SVHN (73.257 imagens de treino, 26.032 de validação/teste).
+    - Treinamento:
 
-    - Otimizador: optim.SGD (Gradiente Descendente Estocástico).
+        - Dataset: SVHN (73.257 imagens de treino, 26.032 de validação/teste).
 
-    - Taxa de Aprendizado (LR): 0.01.
+        - Otimizador: `optim.SGD` (Gradiente Descendente Estocástico).
 
-    - Função de Perda: nn.CrossEntropyLoss (adequada para classificação multiclasse).
+        - Taxa de Aprendizado (LR): 0.01.
 
-    - Épocas: 20.
+        - Função de Perda: `nn.CrossEntropyLoss` (adequada para classificação multiclasse).
 
-    - Batch Size (Tamanho do Lote): 64.
+        - Épocas: 20.
+
+        - Batch Size (Tamanho do Lote): 64.
 
 2. Resultados e Observações
-O modelo foi treinado por 20 épocas, e as métricas de Perda (Loss) de treino e validação foram registradas (conforme o gráfico abaixo).
+    O modelo foi treinado por 20 épocas, e as métricas de Perda (Loss) de treino e validação foram registradas (conforme o gráfico abaixo).
 
-* Gráfico de Perda (Loss):
+    - Gráfico de Perda (Loss):
 
-- Perda de Treino (Linha Azul): Como esperado, a perda de treino diminuiu consistentemente ao longo das 20 épocas. Isso indica que o modelo tem capacidade de aprendizado e estava conseguindo se ajustar e "memorizar" os dados de treinamento.
+        - Perda de Treino (Linha Azul): Como esperado, a perda de treino diminuiu consistentemente ao longo das 20 épocas. Isso indica que o modelo tem capacidade de aprendizado e estava conseguindo se ajustar e "memorizar" os dados de treinamento.
 
-- Perda de Validação (Linha Vermelha): A perda de validação (que mede o desempenho em dados novos) acompanhou a curva de treino nas primeiras épocas (aproximadamente até a época 7).
+        - Perda de Validação (Linha Vermelha): A perda de validação (que mede o desempenho em dados novos) acompanhou a curva de treino nas primeiras épocas (aproximadamente até a época 7).
 
-- Diagnóstico (Overfitting): Após a época 7, um claro sintoma de superajuste (overfitting) se tornou evidente. A perda de validação parou de diminuir, estagnou e começou a flutuar (e até subir), enquanto a perda de treino continuou caindo. Isso significa que o modelo parou de aprender as características gerais dos dígitos e começou a decorar ruídos e detalhes específicos do conjunto de treino.
+        - Diagnóstico (Overfitting): Após a época 7, um claro sintoma de superajuste (overfitting) se tornou evidente. A perda de validação parou de diminuir, estagnou e começou a flutuar (e até subir), enquanto a perda de treino continuou caindo. Isso significa que o modelo parou de aprender as características gerais dos dígitos e começou a decorar ruídos e detalhes específicos do conjunto de treino.
 
 
-* Gráfico de Acurácia (Accuracy):
+    - Gráfico de Acurácia (Accuracy):
 
-A análise do gráfico de acurácia reforça a conclusão do overfitting:
+        A análise do gráfico de acurácia reforça a conclusão do overfitting:
 
-- Acurácia de Treino (Linha Azul): Mostra que o modelo está aprendendo. A acurácia sobre os dados de treino sobe consistentemente durante todo o processo, ultrapassando os 90% ao final das 20 épocas.
+        - Acurácia de Treino (Linha Azul): Mostra que o modelo está aprendendo. A acurácia sobre os dados de treino sobe consistentemente durante todo o processo, ultrapassando os 90% ao final das 20 épocas.
 
-- Acurácia de Validação (Linha Vermelha): Esta métrica apresenta um rápido crescimento inicial, atingindo seu ponto máximo (cerca de 88-89%) por volta da época 15, e então começa a estagnar ou até cair levemente.
+        - Acurácia de Validação (Linha Vermelha): Esta métrica apresenta um rápido crescimento inicial, atingindo seu ponto máximo (cerca de 88-89%) por volta da época 15, e então começa a estagnar ou até cair levemente.
 
-- A "Tesoura" (The Gap): A partir da época 5, as duas curvas começam a se separar, com a acurácia de treino (azul) ficando permanentemente acima da acurácia de validação (vermelha). Esse vão ("gap") é a prova visual do overfitting: o modelo está se tornando excelente apenas nos dados que já viu, mas sua capacidade de generalizar para dados novos (validação) parou de melhorar.
+        - A "Tesoura" (The Gap): A partir da época 5, as duas curvas começam a se separar, com a acurácia de treino (azul) ficando permanentemente acima da acurácia de validação (vermelha). Esse vão ("gap") é a prova visual do overfitting: o modelo está se tornando excelente apenas nos dados que já viu, mas sua capacidade de generalizar para dados novos (validação) parou de melhorar.
 
-Conclusão: O modelo LeNet-like adaptado é capaz de aprender, mas é muito propenso ao overfitting neste dataset. Continuar o treinamento além de 20 épocas só pioraria o desempenho em dados novos. As próximas etapas devem focar em técnicas de regularização para melhorar a generalização do modelo.
+3. Conclusão: O modelo LeNet-like adaptado é capaz de aprender, mas é muito propenso ao overfitting neste dataset. Continuar o treinamento além de 20 épocas só pioraria o desempenho em dados novos. As próximas etapas devem focar em técnicas de regularização para melhorar a generalização do modelo.
 
 ```
 Iniciando o treinamento...
@@ -81,35 +80,47 @@ Treinamento concluído!
 
 ***
 
-### Análise da 2ª Tentativa (Foco em Regularização e Generalização)
+### 2º Treinamento: Aplicação de Regularização (Data Augmentation e Dropout)
+Para esta segunda etapa, o objetivo foi combater o overfitting diagnosticado no primeiro experimento. Mantendo o dataset SVHN, foram introduzidas técnicas de regularização para aumentar a robustez do modelo e sua capacidade de generalização.
 
-Nesta segunda iteração, o objetivo principal foi mitigar o *overfitting* observado no experimento anterior. As métricas obtidas ao longo das 20 épocas demonstram um comportamento inverso ao da primeira tentativa, indicando uma mudança significativa na dinâmica de aprendizado do modelo.
+1. Configuração do Experimento
+A arquitetura base (LeNet-5 adaptada) e os hiperparâmetros fundamentais foram mantidos, porém com a adição de camadas de Dropout e transformações nas imagens de entrada.
 
-#### 1. Comportamento das Métricas (Logs)
-Observando os registros de treinamento, notam-se três fases distintas:
-* **Fase de Aquecimento (Épocas 1-3):** O modelo apresentou dificuldade inicial, com a acurácia travada em torno de 18-19% e a perda (*Loss*) estagnada acima de 2.2. Isso é característico de cenários com regularização forte ou taxas de aprendizado que necessitam de um momento inicial para superar mínimos locais.
-* **Fase de Convergência Rápida (Épocas 4-7):** A partir da 4ª época, o modelo "destravou", saltando de ~22% para ~79% de acurácia de validação em apenas 4 épocas. Simultaneamente, a perda caiu drasticamente de 2.13 para 0.69.
-* **Estabilização (Épocas 15-20):** O aprendizado desacelerou, mas manteve a constância. Ao final da 20ª época, atingiu-se uma **Acurácia de Validação de 89.54%**, com uma **Perda de 0.37**.
+    - Alterações na Arquitetura e Dados:
 
-#### 2. Análise Visual (Gráficos)
-A principal característica visual desta tentativa é a **inversão do "Gap" de desempenho** observada nos gráficos em anexo:
+        - Data Augmentation: Foram aplicadas transformações aleatórias nas imagens de treino (possivelmente rotações, crops ou inversões, dependendo do seu código). Isso "aumenta" artificialmente a diversidade dos dados, impedindo que o modelo memorize imagens estáticas.
 
-* **Gráfico de Perda (*Loss*) - Escala Logarítmica:**
-    Diferente da primeira tentativa, a linha vermelha (Validação) manteve-se consistentemente **abaixo** da linha azul (Treino) durante a maior parte do processo. Isso indica que o erro do modelo em dados novos foi sistematicamente menor do que nos dados utilizados para o ajuste dos pesos.
+        - Dropout: Foram inseridas camadas de nn.Dropout (provavelmente nas camadas lineares/densas). O Dropout "desliga" aleatoriamente uma porcentagem dos neurônios durante o treinamento, forçando a rede a aprender caminhos redundantes e características mais robustas.
 
-* **Gráfico de Acurácia (*Accuracy*):**
-    O fenômeno se repete: a Acurácia de Validação (Vermelha) é superior à de Treino (Azul).
-    * **Treino Final:** ~85.73%
-    * **Validação Final:** ~89.54%
+    - Treino:
 
-#### 3. Discussão do Fenômeno (Validação > Treino)
-Este cenário atípico, onde o desempenho na validação supera o do treino, é um forte indicativo da presença de mecanismos de **Regularização** (como *Dropout* ou *Data Augmentation*):
+        - Hiperparâmetros: Mantidos (Otimizador SGD, LR 0.01, 20 Épocas, Batch Size 64).
 
-1.  **Penalidade no Treino:** Durante o treinamento, o modelo enfrenta "obstáculos" inseridos pela regularização (ex: neurônios desligados aleatoriamente ou imagens distorcidas), o que dificulta a classificação e penaliza as métricas de treino.
-2.  **Vantagem na Validação:** Durante a etapa de validação, esses obstáculos são removidos (a rede utiliza sua capacidade total e/ou as imagens não sofrem distorção), permitindo que o modelo performe melhor.
+2. Resultados e Observações
+O modelo foi treinado novamente por 20 épocas. Ao analisar os gráficos de Perda e Acurácia (imagem anexada) e os logs, observa-se um comportamento drasticamente diferente do primeiro treinamento.
 
-#### Conclusão da 2ª Tentativa
-O problema de *overfitting* foi solucionado com êxito. O modelo deixou de memorizar ruídos do conjunto de treino e desenvolveu uma capacidade robusta de **generalização**. O resultado final de **89.54%** na validação não apenas supera o pico da tentativa anterior, como também apresenta maior confiabilidade para inferências em dados reais.
+    - Gráfico de Perda (Loss):
+
+        - Inversão de Curvas: Diferente do 1º treino, a Perda de Validação (Linha Vermelha) manteve-se consistentemente abaixo da Perda de Treino (Linha Azul) a partir da época 6.
+
+        - Interpretação: Isso ocorre devido ao funcionamento do Dropout e do Data Augmentation. Durante o treino, o modelo "sofre" com neurônios desligados e imagens distorcidas (augmentation), o que eleva a perda. Durante a validação, o Dropout é desligado (a rede usa 100% da capacidade) e as imagens são limpas (sem distorção), facilitando a classificação.
+
+        - Convergência: Ambas as curvas continuam caindo até o final, sem sinais de overfitting (a linha vermelha não voltou a subir).
+
+    - Gráfico de Acurácia (Accuracy):
+
+        - Acurácia de Validação Superior: A acurácia de validação terminou em 89.54%, superando a acurácia de treino (85.73%).
+
+        - Comparação com o Modelo Base:
+
+            - Modelo Base: Treino ~92.4% | Validação ~88.4% (Gap de ~4% indicando overfitting).
+
+            - Modelo Regularizado: Treino ~85.7% | Validação ~89.5%.
+
+        - Análise: Embora a acurácia de treino tenha diminuído em relação ao primeiro experimento (o que é esperado, pois o treino ficou "mais difícil"), a acurácia de validação aumentou (de 88.4% para 89.5%). Isso prova que o modelo parou de "decorar" o treino e passou a aprender padrões que funcionam melhor em dados novos.
+
+3. Conclusão
+A aplicação de Data Augmentation e Dropout foi bem-sucedida. O problema de overfitting foi eliminado (na verdade, temos um cenário onde a validação performa melhor que o treino devido à mecânica das regularizações). O modelo agora é mais generalista e robusto, atingindo um desempenho final superior em dados de teste/validação em comparação à tentativa inicial.
 
 ***
 
@@ -140,12 +151,28 @@ Treinamento concluído!
 
 ![Treino2](https://github.com/polianaraujo/dca0305/blob/main/u2/images/treino2.png?raw=true)
 
+
+## Conclusões
+
+***
+| Métrica | Modelo Base (Sem Regularização) | Modelo Regularizado (Dropout + Augmentation) | Variação |
+|-|-|-|-|
+| Acurácia de Treino | 92.45% | 85.73% | ↓ -6.72% |
+| Acurácia de Validação | 88.45% | 89.54% | ↑ +1.09% |
+| Gap (Treino - Validação) | +4.0% (Overfitting) | -3.8% (Validação Superior) | Inversão do Gap |
+| Comportamento da Loss | Validação diverge do Treino | Validação acompanha Treino | Estabilização |
 ***
 
-| Característica | Tentativa 1 (Modelo Base) | Tentativa 2 (Com Regularização) |
-|----------------|---------------------------|---------------------------------|
-| Diagnóstico Principal | Overfitting (Superajuste) | Generalização Robusta |
-| Comportamento das Curvas | Acurácia de Treino muito superior à de Validação (Gap abrindo). | Acurácia de Validação superior à de Treino (Gap invertido). |
-| Tendência da Perda (Loss) | Perda de Validação começou a subir após a época 7. | Perda de Validação manteve-se caindo e sempre abaixo da perda de Treino. |
-| Interpretação | O modelo estava "memorizando" os dados de treino e falhando em dados novos. | O modelo aprendeu padrões gerais, performando melhor sem as penalidades da regularização (validação) do que com elas (treino). | 
-| Acurácia Final (Validação) | Estagnada em ~88% (com tendência de queda). | 89.54% (sólida e estável). |
+### Por quê que, no 2º treino (com Data Augmentation e Dropout) a acurácia de treino caiu, e ainda assim o modelo ser considerado "melhor"?
+
+1. O Efeito do Dropout ("Treinando com pesos")
+
+    - No Treino: O Dropout desliga aleatoriamente uma porcentagem dos neurônios. A rede neural está tentando aprender "com uma mão amarrada". Ela tem menos capacidade de processamento, por isso erra mais e a acurácia cai (ficou abaixo de 90%).
+
+    - Na Validação/Teste: A "mochila" é removida. O Dropout é desligado e todos os neurônios funcionam juntos. Como a rede aprendeu a se virar em condições difíceis, agora que está com capacidade total, ela performa muito bem (melhor até que no treino).
+
+2. O Efeito do Data Augmentation ("Alvo Móvel")
+
+    - No 1º Treinamento (Sem Augmentation): O modelo via sempre as mesmas imagens estáticas. É muito fácil para uma rede neural "decorar" pixels específicos. Por isso a acurácia foi lá para cima (>90%), mas era uma "falsa inteligência" (overfitting).
+
+    - No 2º Treinamento (Com Augmentation): A cada época, a imagem sofre uma leve rotação, zoom ou distorção. O modelo nunca vê a imagem exata duas vezes. Isso torna a tarefa de treino muito mais difícil, derrubando a acurácia de treino. Porém, obriga o modelo a aprender o conceito do número (a forma do '3') e não os pixels exatos.
