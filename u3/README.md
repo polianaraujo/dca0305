@@ -4,14 +4,14 @@ O estudo explora desde a matemática da suavização de gradientes até o impact
 
 ## 📋 Tópicos Abordados* **EWMA (Exponentially Weighted Moving Averages):** Análise da suavização de gradientes e comparação com médias simples (SMA).
 * **Otimizadores:**
-* **Adam:** Impacto dos hiperparâmetros (\beta_1, \beta_2, \epsilon).
+* **Adam:** Impacto dos hiperparâmetros ($\beta_1$, $\beta_2$, $\epsilon$).
 * **SGD:** Comparação entre SGD Puro, Momentum e Nesterov.
 
 
 * **Schedulers:** Comparação de performance entre `StepLR` e `MultiStepLR`.
 * **Visualização Interna:** Inspeção de gradientes crus vs. adaptados durante o treino.
 
-##📊 Principais ResultadosCom base nos experimentos realizados:
+## 📊 Principais ResultadosCom base nos experimentos realizados:
 
 1. **Estabilidade:** A aplicação de EWMA nos gradientes é crítica para reduzir a variância e estabilizar o treino.
 2. **Performance:** O **MultiStepLR** obteve o melhor desempenho (92.41% de acurácia) comparado ao StepLR, demonstrando melhor refinamento na descida do gradiente.
@@ -42,7 +42,7 @@ jupyter notebook notebooks/02_comparacao_otimizadores.ipynb
 
 
 
-## 📚 Referências Principais* *Adam: A method for stochastic optimization* (Kingma & Ba, 2014)
+## 📚 Referências Principais Adam: A method for stochastic optimization* (Kingma & Ba, 2014)
 * *A disciplined approach to neural network hyper-parameters* (Smith, 2018)
 * *On the importance of initialization and momentum in deep learning* (Sutskever et al., 2013)
 
