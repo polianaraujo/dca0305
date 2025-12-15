@@ -44,37 +44,3 @@ def plot_lr_history(lrs, title="Learning Rate Decay"):
     plt.ylabel('Learning Rate')
     plt.grid(True)
     plt.show()
-    
-def plot_gradients_distribution_with_sma(raw, sma, ewma, adapted):
-    """
-    Plota 4 histogramas: Raw, SMA (Simulado), EWMA (Real) e Adapted (Real).
-    """
-    fig, ax = plt.subplots(1, 4, figsize=(24, 5))
-    
-    # Configurações visuais comuns
-    kwargs = {'bins': 50, 'kde': True, 'stat': 'density', 'alpha': 0.6, 'edgecolor': None}
-
-    # 1. Gradientes Crus
-    sns.histplot(raw, ax=ax[0], color='gray', **kwargs)
-    ax[0].set_title("1. Gradientes Crus (Raw)")
-    ax[0].set_xlabel("Magnitude")
-    
-    # 2. Média Móvel Simples (SMA) - Simulada
-    sns.histplot(sma, ax=ax[1], color='orange', **kwargs)
-    ax[1].set_title("2. Média Móvel Simples (SMA-10)")
-    ax[1].set_xlabel("Magnitude Média")
-    # Força a mesma escala do EWMA para comparação justa
-    ax[1].set_xlim(ax[2].get_xlim()) 
-    
-    # 3. EWMA (Momentum do Adam) - Real
-    sns.histplot(ewma, ax=ax[2], color='blue', **kwargs)
-    ax[2].set_title("3. EWMA (Momentum Real)")
-    ax[2].set_xlabel("Magnitude Suavizada")
-    
-    # 4. Gradientes Adaptados (Adam) - Real
-    sns.histplot(adapted, ax=ax[3], color='green', **kwargs)
-    ax[3].set_title("4. Gradientes Adaptados (Final Step)")
-    ax[3].set_xlabel("Magnitude Normalizada")
-    
-    plt.tight_layout()
-    plt.show()
