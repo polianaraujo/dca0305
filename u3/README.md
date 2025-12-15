@@ -4,7 +4,7 @@ Este projeto apresenta uma análise comparativa aprofundada sobre algoritmos de 
 
 O estudo explora desde a matemática da suavização de gradientes até o impacto prático na convergência de redes neurais convolucionais (CNNs).
 
-## 📋 Tópicos Abordados*
+## 📋 Tópicos Abordados
 
 * **EWMA (Exponentially Weighted Moving Averages):** Análise da suavização de gradientes e comparação com médias simples (SMA).
 * **Otimizadores:**
