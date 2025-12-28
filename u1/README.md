@@ -15,6 +15,11 @@ Foi aplicada a técnica de Intervalo Interquartil (IQR) para identificar e remov
 
     ![violinplots_apos_iqr.png](https://github.com/polianaraujo/dca0305/blob/main/u1/images/violinplots_apos_iqr.png)
 
+    - Plus: Verificação de clusters, para visualizar as localizações de imóveis no Rio de Janeiro, e usar como feature.
+
+    ![clusters.png](https://github.com/polianaraujo/dca0305/blob/main/u1/images/clusters.png)
+
+
 2. Arquitetura do Modelo
 O modelo consiste em uma rede neural sequencial (MLP) construída em PyTorch, projetada para tarefas de regressão, utilizando:
 
