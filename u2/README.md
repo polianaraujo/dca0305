@@ -1,3 +1,12 @@
+# Comparativo de Regularização em CNNs: Desafiando o Overfitting com o Dataset SVHN
+Este projeto apresenta um estudo comparativo focado em técnicas de combate ao overfitting em Redes Neurais Convolucionais (CNNs). Utilizando o dataset SVHN (Street View House Numbers), exploramos como modificações arquiteturais e estratégias de pré-processamento impactam a capacidade de generalização de um modelo baseado na clássica LeNet-5.
+
+- Adaptação de Arquitetura: Modificação da LeNet-5 original para processar 3 canais de cor (RGB) e ajuste da camada densa para 480 features (tensor 120x2x2).
+
+- Abordagem Experimental: Comparação direta entre um modelo "Baseline" (sem regularização) e um modelo otimizado.
+
+- Técnicas de Regularização: Implementação de Dropout (camadas de descarte aleatório) e Data Augmentation (transformações de cor e rotação).
+
 ## 1ª treinamento: Análise da Tentativa Inicial (Modelo Base)
 Para este projeto, o dataset escolhido foi o SVHN (Street View House Numbers). Este dataset consiste em imagens coloridas (3 canais, RGB) de 32x32 pixels, representando 10 classes (dígitos de 0 a 9).
 
