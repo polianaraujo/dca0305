@@ -47,6 +47,9 @@ Todos os resultados podem ser visualizados no csv *resultados_experimentos_seque
 |Min-Max|SGD|112.22|158.98|0.373|
 |Z-Score|SGD|112.43|159.51|0.369|
 
+Os resultados superaram expectativas, visto que o pedido do professor foi que obtivesse um erro menor que 200.
+OBS: Foi o menor erro encontrado dos trabalhos da turma!
+
 ## Sua própria execução do projeto
 
 1. Clone este repositório.
